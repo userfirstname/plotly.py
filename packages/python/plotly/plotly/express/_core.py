@@ -2285,6 +2285,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 group[var] = group[var].cumsum()
                 if not ascending:
                     group = group.sort_values(by=base, ascending=True)
+                    group=group.groupby(by=args['x'],group_keys=False).apply(lambda x: x.iloc[::-1])
 
                 if args.get("ecdfmode", "standard") == "complementary":
                     group[var] = group_sum - group[var]
